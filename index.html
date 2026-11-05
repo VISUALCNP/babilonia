@@ -2,161 +2,249 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Club Babilonia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b3d0b">
+  <title>Club Babilonia Fútbol</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      min-width: 320px;
       margin: 0;
-      background: linear-gradient(to bottom, #0b3d0b, #1a1a1a);
-      color: white;
+      background: linear-gradient(160deg, #0b3d0b, #1a1a1a 65%);
+      color: #fff;
+      font-family: Arial, sans-serif;
       text-align: center;
     }
+
     header {
-      padding: 10px;
-      background: rgba(0,0,0,0.6);
+      padding: clamp(16px, 3vw, 32px) 16px 28px;
+      background: rgba(0, 0, 0, 0.28);
     }
-    header h1 {
-      font-size: 2.0em;
-      margin: 0px 0;
-      background: linear-gradient(to bottom, #0b3d0b, #1a1a1a);
+
+    h1 {
+      margin: 0 auto;
+      max-width: 1000px;
+      font-size: clamp(1.65rem, 5vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: clamp(2px, 1vw, 7px);
       text-transform: uppercase;
-      letter-spacing: 7px;
     }
+
     .carousel-container {
       position: relative;
       display: flex;
-      justify-content: center;
       align-items: center;
-      margin: 30px auto;
-      max-width: 1100px;
+      justify-content: center;
+      width: min(100%, 1040px);
+      margin: clamp(20px, 4vw, 36px) auto;
+      padding: 0 58px;
     }
+
     .carousel {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 35px;
-      flex-wrap: wrap;
+      width: 100%;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.35);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
     }
+
     .carousel img {
-      width: 200px;
-      height: 120px;
-      object-fit: contain;
-      opacity: 0.5;
-      transition: transform 0.8s ease, opacity 0.8s ease;
-      border-radius: 8px;
-      border: 2px solid white;
-      flex-shrink: 0;
       display: none;
-      cursor: pointer;
+      width: 100%;
+      height: clamp(240px, 56vw, 560px);
+      max-height: 65vh;
+      object-fit: contain;
+      cursor: zoom-in;
     }
-    .carousel img.active {
-      transform: scale(1.3);
-      opacity: 1;
-      z-index: 2;
+
+    .carousel img.is-visible {
+      display: block;
     }
+
     .arrow {
       position: absolute;
+      z-index: 1;
       top: 50%;
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
       transform: translateY(-50%);
-      background: transparent;
-      color: white;
-      border: none;
-      font-size: 2.5em;
-      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      font-size: 1.7rem;
+      line-height: 1;
       cursor: pointer;
     }
-    .arrow.left { left: 20px; }
-    .arrow.right { right: 20px; }
+
+    .arrow:hover,
+    .arrow:focus-visible {
+      background: #0b3d0b;
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    .arrow.left {
+      left: 4px;
+    }
+
+    .arrow.right {
+      right: 4px;
+    }
+
+    .photo-count {
+      margin: -20px auto 28px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+    }
+
     .info {
-      margin: 3px auto;
-      max-width: 450px;
-      background: rgba(255,255,255,0.05);
-      padding: 1px;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.3);
-      font-size: 0.9em;
+      width: min(100%, 620px);
+      margin: 0 auto;
+      padding: 8px clamp(14px, 3vw, 24px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.07);
     }
+
     .info h2 {
-      margin-bottom: 15px;
-      font-size: 1.99em;
+      margin: 12px 0 16px;
+      font-size: clamp(1.4rem, 4vw, 2rem);
       text-decoration: underline;
+      text-underline-offset: 5px;
     }
+
     .info ul {
-      list-style: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
+      list-style: none;
     }
+
     .info li {
-      margin: 16px 0;
-      font-size: 1.25em;
+      margin: 14px 0;
+      font-size: clamp(1rem, 2.8vw, 1.2rem);
+      line-height: 1.5;
     }
+
     .whatsapp {
-      margin: 18px auto;
+      margin: 24px auto 4px;
     }
+
     .whatsapp a {
-      background-color:#25D366;
-      color:white;
-      padding:6px 15px;
-      text-decoration:none;
-      border-radius:12px;
-      font-size:1.1em;
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: #25d366;
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .whatsapp a:hover,
+    .whatsapp a:focus-visible {
+      background: #1da851;
+      outline: 2px solid #fff;
+      outline-offset: 3px;
     }
 
     footer {
-      margin-top: 3px;
-      padding: 4px 0;       /* altura mínima */
-      background: #0b3d0b;  /* verde sólido */
-      font-size: 0.8em;
-      width: 100%;
-      text-align: center;
+      padding: 14px 12px;
+      background: #0b3d0b;
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
 
     .modal {
-      display: none;
       position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.8);
-      justify-content: center;
+      z-index: 10;
+      inset: 0;
+      display: none;
       align-items: center;
-    }
-    .modal img {
-      max-width: 90%;
-      max-height: 90%;
-      border: 3px solid white;
-      border-radius: 10px;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.9);
     }
 
-    /* Ajustes para móviles */
+    .modal.is-open {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: 100%;
+      max-height: 85vh;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: max(12px, env(safe-area-inset-top));
+      right: max(12px, env(safe-area-inset-right));
+      width: 44px;
+      height: 44px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      background: #111;
+      color: #fff;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
     @media (max-width: 600px) {
-      .carousel {
-        flex-direction: column;   /* apila las fotos */
-        align-items: center;      /* centra las fotos */
-        gap: 10px;
+      header {
+        padding-right: 12px;
+        padding-left: 12px;
       }
-      .carousel img {
-        width: 90%;               /* ocupan casi todo el ancho */
-        height: auto;             /* altura automática */
-        display: block;           /* se muestran todas */
+
+      .carousel-container {
+        padding: 0 42px;
       }
+
       .arrow {
-        display: none;            /* ocultamos flechas en móvil */
+        width: 38px;
+        height: 38px;
+        font-size: 1.4rem;
       }
+
+      .arrow.left {
+        left: 0;
+      }
+
+      .arrow.right {
+        right: 0;
+      }
+
+      .carousel img {
+        height: min(62vh, 440px);
+        min-height: 220px;
+      }
+
+      .photo-count {
+        margin-top: -12px;
+      }
+
       .info {
-        max-width: 95%;
-        font-size: 0.85em;
-        padding: 5px;
+        padding: 8px 12px;
       }
-      .whatsapp a {
-        font-size: 1em;
-        padding: 6px 12px;
-      }
+
       footer {
-        font-size: 0.7em;
-        padding: 2px 0;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
       }
     }
   </style>
@@ -164,114 +252,111 @@
 <body>
   <header>
     <h1>Club Babilonia Fútbol</h1>
-    <div class="carousel-container">
-      <button class="arrow left">❮</button>
-      <div class="carousel">
-        <img src="fotos/1.png" alt="Foto 1">
-        <img src="fotos/2.png" alt="Foto 2">
-        <img src="fotos/3.png" alt="Foto 3">
-        <img src="fotos/4.png" alt="Foto 4">
-        <img src="fotos/5.png" alt="Foto 5">
-        <img src="fotos/6.png" alt="Foto 6">
-        <img src="fotos/7.png" alt="Foto 7">
-        <img src="fotos/8.png" alt="Foto 8">
-        <img src="fotos/9.png" alt="Foto 9">
-        <img src="fotos/10.png" alt="Foto 10">
-        <img src="fotos/11.png" alt="Foto 11">
-        <img src="fotos/12.png" alt="Foto 12">
-      </div>
-      <button class="arrow right">❯</button>
-    </div>
 
-    <div class="info">
-      <h2>Servicios que ofrecemos</h2>
+    <section class="carousel-container" aria-label="Galería de fotos del club">
+      <button class="arrow left" type="button" aria-label="Ver foto anterior">❮</button>
+      <div class="carousel" aria-live="polite">
+        <img src="fotos/1.png" alt="Foto 1" class="is-visible" tabindex="0">
+        <img src="fotos/2.png" alt="Foto 2" tabindex="0">
+        <img src="fotos/3.png" alt="Foto 3" tabindex="0">
+        <img src="fotos/4.png" alt="Foto 4" tabindex="0">
+        <img src="fotos/5.png" alt="Foto 5" tabindex="0">
+        <img src="fotos/6.png" alt="Foto 6" tabindex="0">
+        <img src="fotos/7.png" alt="Foto 7" tabindex="0">
+        <img src="fotos/8.png" alt="Foto 8" tabindex="0">
+        <img src="fotos/9.png" alt="Foto 9" tabindex="0">
+        <img src="fotos/10.png" alt="Foto 10" tabindex="0">
+        <img src="fotos/11.png" alt="Foto 11" tabindex="0">
+        <img src="fotos/12.png" alt="Foto 12" tabindex="0">
+      </div>
+      <button class="arrow right" type="button" aria-label="Ver foto siguiente">❯</button>
+    </section>
+    <p class="photo-count" id="photoCount" aria-live="polite">Foto 1 de 12</p>
+
+    <section class="info" aria-labelledby="services-title">
+      <h2 id="services-title">Servicios que ofrecemos</h2>
       <ul>
         <li>Canchas de 6 y 8 ⚽⚽⚽ - Quincho y Asador 🥩🥓</li>
         <li>Cumpleaños 🥳🎈🍰🎁 - Bebidas y Comidas 🍻🍔🍕</li>
       </ul>
-    </div>
+    </section>
 
     <div class="whatsapp">
-      <a href="https://wa.me/3518724698" target="_blank">📱 Consultas por WhatsApp</a>
+      <a href="https://wa.me/3518724698" target="_blank" rel="noopener noreferrer">📱 Consultas por WhatsApp</a>
     </div>
   </header>
 
   <footer>
-    📍 Monseñor Pablo Cabrera 1864 <br>
+    📍 Monseñor Pablo Cabrera 1864<br>
     📞 Tel: 3518724698 — Turnos y consultas
   </footer>
 
-  <div class="modal" id="modal">
-    <img id="modalImg" src="" alt="Imagen ampliada">
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+    <button class="modal-close" id="closeModal" type="button" aria-label="Cerrar foto ampliada">×</button>
+    <img id="modalImg" src="" alt="">
   </div>
 
   <script>
-    const images = document.querySelectorAll('.carousel img');
+    const images = Array.from(document.querySelectorAll('.carousel img'));
     const leftArrow = document.querySelector('.arrow.left');
     const rightArrow = document.querySelector('.arrow.right');
-    let blockIndex = 0;
-    let activeIndex = 0;
+    const photoCount = document.getElementById('photoCount');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const closeModalButton = document.getElementById('closeModal');
+    let currentIndex = 0;
+    let lastFocusedImage = null;
 
-    function showBlock() {
-      images.forEach(img => {
-        img.style.display = "none";
-        img.classList.remove("active");
+    function showImage(index) {
+      currentIndex = (index + images.length) % images.length;
+      images.forEach((image, imageIndex) => {
+        image.classList.toggle('is-visible', imageIndex === currentIndex);
       });
+      photoCount.textContent = 'Foto ' + (currentIndex + 1) + ' de ' + images.length;
+    }
 
-      const start = blockIndex * 3;
-      const end = start + 3;
+    function openModal(image) {
+      lastFocusedImage = image;
+      modalImg.src = image.src;
+      modalImg.alt = image.alt;
+      modal.classList.add('is-open');
+      closeModalButton.focus();
+    }
 
-      for (let i = start; i < end && i < images.length; i++) {
-        images[i].style.display = "block";
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modalImg.src = '';
+      if (lastFocusedImage) {
+        lastFocusedImage.focus();
       }
-
-      const active = start + activeIndex;
-      if (active < images.length) {
-        images[active].classList.add("active");
-      }
     }
 
-    function next() {
-      activeIndex++;
-      if (activeIndex >= 3 || (blockIndex*3 + activeIndex) >= images.length) {
-        activeIndex = 0;
-        blockIndex = (blockIndex + 1) % Math.ceil(images.length / 3);
-      }
-      showBlock();
-    }
+    leftArrow.addEventListener('click', () => showImage(currentIndex - 1));
+    rightArrow.addEventListener('click', () => showImage(currentIndex + 1));
 
-    function prevBlock() {
-      blockIndex = (blockIndex - 1 + Math.ceil(images.length / 3)) % Math.ceil(images.length / 3);
-      activeIndex = 0;
-      showBlock();
-    }
-
-    function nextBlock() {
-      blockIndex = (blockIndex + 1) % Math.ceil(images.length / 3);
-      activeIndex = 0;
-      showBlock();
-    }
-
-    leftArrow.addEventListener('click', prevBlock);
-    rightArrow.addEventListener('click', nextBlock);
-
-    showBlock();
-    setInterval(next, 3000); // rotación automática
-
-    const modal = document.getElementById("modal");
-    const modalImg = document.getElementById("modalImg");
-
-    images.forEach(img => {
-      img.addEventListener("click", () => {
-        modal.style.display = "flex";
-        modalImg.src = img.src;
+    images.forEach((image) => {
+      image.addEventListener('click', () => openModal(image));
+      image.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openModal(image);
+        }
       });
     });
 
-
-    modal.addEventListener("click", () => {
-      modal.style.display = "none";
+    closeModalButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
     });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+
+    showImage(0);
   </script>
 </body>
 </html>
